@@ -1,17 +1,20 @@
-#include <led.h>
+//example Arduino
+#include "Timer.h"
 
-
-Led led;
+Timer timer;
 
 void setup()
 {
-    led.begin(2);
+    timer.start();
+    pinMode(2,OUTPUT);
 }
 
 void loop()
 {
-    delay(100);
-    led.on();
-    delay(100);
-    led.of();
+    if( timer.elapsed() > 100 )
+    {
+        bool state = digitalRead(2);
+        digitalWrite(2,!state);
+        timer.start();
+    }
 }
